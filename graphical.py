@@ -44,7 +44,7 @@ def drawtree(root):
     turtle.mainloop()
     
 if __name__ == '__main__':
-    drawtree(deserialize('[2,5,1,7,2,3,4,5,9]'))
+    drawtree(deserialize('[2,3,4,5,6]'))
     
     
     

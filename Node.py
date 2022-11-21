@@ -1,4 +1,5 @@
 import collections
+from graphical import drawtree , deserialize
 
 NodesBeenMade = 0  
 
@@ -100,7 +101,34 @@ class BinaryTree :
             for j in i : 
                 if j == atribute : 
                     return x
+    
+    def MakeList(self , type ) -> list :
+        MyList = []
+        result = tree.PrintTree(type)
+        for i in result :
+            if i != "," : 
+                MyList.append(int(i))
+        return MyList
+    
+    def compare(self , type ) : 
+        result = tree.MakeList(type)
+        print(result)
+        lst = list(map(int , input('Enter your tree with desired order : ').split()))
+        return True if result == lst else False
+    
+    def draw(self) :
+        result = tree.PrintTree('levelorder') 
+        result_fixed = []
+        for i in result : 
+            for j in i :
+                result_fixed.append(j)
+        drawtree(deserialize(str(result_fixed)))             
+                   
+    
         
+        
+        
+                   
         
     
             
@@ -124,7 +152,7 @@ class BinaryTree :
 # delete the tree -> 1
 # MAX and MIN in our tree -> 1 
 # full tree -> 0 
-# compare of two tree -> 0 
+# compare of two tree -> 1 
 
 
 
@@ -137,8 +165,13 @@ tree.root.left.right = Node(6)
 
 
 
-print(tree.PrintTree("levelorder"))
-result = tree.MAX_MIN()
-print("MAX and MIN is equal to : " , result)
-x = tree.find(5)
-print("Found the desired element at the : [" , x , "] floor ")
+# print(tree.PrintTree("preorder"))
+# result = tree.MAX_MIN()
+# print("MAX and MIN is equal to : " , result)
+# x = tree.find(5)
+# print("Found the desired element at the : [" , x , "] floor ")
+print(tree.draw())
+
+# lst = list(map(int , input('Enter your tree with ' , type , " order : ").split()))
+# print(lst)
+
