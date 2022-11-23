@@ -101,6 +101,7 @@ class BinaryTree :
             for j in i : 
                 if j == atribute : 
                     return x
+        return "Not Found ! "
     
     def MakeList(self , type ) -> list :
         MyList = []
@@ -122,15 +123,11 @@ class BinaryTree :
         for i in result : 
             for j in i :
                 result_fixed.append(j)
-        drawtree(deserialize(str(result_fixed)))             
-                   
+        drawtree(deserialize(str(result_fixed)))    
     
-        
-        
-        
-                   
-        
-    
+    def countLeaves(self) : 
+        result = tree.PrintTree("levelorder")
+        return len(result[2])         
             
         """_summary_
        2
@@ -147,7 +144,7 @@ class BinaryTree :
 # insert method -> 1
 # NodesBeenMade for number of nodes -> 1
 # number of floors -> 1
-# how to define number of leaves -> 0
+# how to define number of leaves -> 1
 # made the 4 method and its working  -> 1 
 # delete the tree -> 1
 # MAX and MIN in our tree -> 1 
@@ -170,7 +167,15 @@ tree.root.left.right = Node(6)
 # print("MAX and MIN is equal to : " , result)
 # x = tree.find(5)
 # print("Found the desired element at the : [" , x , "] floor ")
+print(tree.PrintTree('preorder'))
+print(tree.PrintTree('inorder'))
+print(tree.PrintTree('postorder'))
+print(tree.PrintTree('levelorder'))
+print(tree.floors_number())
+print(tree.MAX_MIN())
+print(tree.find(7))
 print(tree.draw())
+print(tree.countLeaves())
 
 # lst = list(map(int , input('Enter your tree with ' , type , " order : ").split()))
 # print(lst)
