@@ -139,34 +139,16 @@ class BinaryTree :
    [3.4]
    [5,6]
         """
-# made a binary tree -> 1 
-# node class -> 1 
-# insert method -> 1
-# NodesBeenMade for number of nodes -> 1
-# number of floors -> 1
-# how to define number of leaves -> 1
-# made the 4 method and its working  -> 1 
-# delete the tree -> 1
-# MAX and MIN in our tree -> 1 
-# full tree -> 0 
-# compare of two tree -> 1 
 
 
-
+# making a test binary tree 
 tree = BinaryTree(2)   
 tree.root.left = Node(3)
 tree.root.right = Node(4)
 tree.root.left.left = Node(5)
 tree.root.left.right = Node(6)
 
-
-
-
-# print(tree.PrintTree("preorder"))
-# result = tree.MAX_MIN()
-# print("MAX and MIN is equal to : " , result)
-# x = tree.find(5)
-# print("Found the desired element at the : [" , x , "] floor ")
+# trying out the methods 
 print(tree.PrintTree('preorder'))
 print(tree.PrintTree('inorder'))
 print(tree.PrintTree('postorder'))
@@ -177,6 +159,4 @@ print(tree.find(7))
 print(tree.draw())
 print(tree.countLeaves())
 
-# lst = list(map(int , input('Enter your tree with ' , type , " order : ").split()))
-# print(lst)
 
