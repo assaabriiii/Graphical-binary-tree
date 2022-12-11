@@ -1,60 +1,140 @@
 import collections
-from graphical import drawtree , deserialize
-
+from graphical import drawtree , Banching
 NodesBeenMade = 0  
 
 class Node : 
     def __init__(self , data )  :
         self.left = None  
         self.right = None  
-        self.data = data 
+        self.value = data 
+        
+    def addLeftChild(self, value: int):
+        self.left = Node(value)
+        return self.left
+    
+    def addRightChild(self, value: int):
+        self.right = Node(value)
+        return self.right
+    
+    
+  
+
+    def __repr__(self):
+        return "value of node equals by -> " + str(self.value)
+    
     
 class BinaryTree : 
-    def __init__(self , root) : 
-        self.root = Node(root)
+    def __init__(self , data : list or Node) -> None: 
+        
+        self.data = data
+        self.root = None
+        
+        if type(data) == list:
+            for number in data:
+                self._branching(self.root, number)
+        elif type(data) == Node:
+            self.root = data
+        else:
+            print("wrong input type -> allowed types (list[numbers], TreeNode), entered type -> {}".format(type(data)))
+            exit(-1)
+    
+    
+    
+    def _branching(self, node: Node, data: int) :
+
+        if self.root == None:
+            self.root = Node(data)
+        else:
+            if node.value > data:
+                if node.left != None:
+                    self._branching(node.left, data)
+                else:
+                    node.addLeftChild(data)
+            elif node.value < data:
+                if node.right != None:
+                    self._branching(node.right, data)
+                else:
+                    node.addRightChild(data)
+            elif node.value == data:
+                print("you can't insert duplicate value")
+                return -1
+    
     
     def PrintTree(self , trav_type) :
-        if trav_type == "preorder"  : 
-            return self.preorder_tree(tree.root , "")
-        elif trav_type == "inorder" :
-            return self.inorder_tree(tree.root , "")
-        elif trav_type == "postorder" : 
-            return self.postorder_tree(tree.root , "")
-        elif trav_type == "levelorder" : 
-            return self.levelorder_tree(tree.root)
+        
+        """ Print tree using your desired traversal 
+
+        Returns:
+            desired traversal 
+        """
+        
+        if trav_type == "1"  : 
+            return self.preorder_tree(self.root , "")
+        elif trav_type == "2" :
+            return self.inorder_tree(self.root , "")
+        elif trav_type == "3" : 
+            return self.postorder_tree(self.root , "")
+        elif trav_type == "4" : 
+            return self.levelorder_tree(self.root)
         else : 
-            return False 
+            print("Invalid input !")
     
-    def preorder_tree(self , start , trav) : 
-        ## ROOT > LEFT > RIGHT
+    def preorder_tree(self , start : Node , trav) : 
+
+        """ Preorder from root to left then right 
+
+        Returns:
+            preorder traversal 
+        """
+        
         if start : 
             global NodesBeenMade 
             NodesBeenMade +=1 
-            trav += (str(start.data) + "," )
+            trav += (str(start.value) + "," )
             trav = self.preorder_tree(start.left , trav) 
             trav = self.preorder_tree(start.right , trav)
         return trav 
         
-    def inorder_tree(self , start , trav) : 
-        ## LEFT > ROOT > RIGHT
+    def inorder_tree(self , start : Node  , trav) : 
+        
+        """ Inorder from left to root then right 
+
+        Returns:
+            inorder traversal 
+        """
+        
         if start : 
             global NodesBeenMade 
             NodesBeenMade +=1 
             trav = self.inorder_tree(start.left , trav) 
-            trav += (str(start.data) + ",")
+            trav += (str(start.value) + ",")
             trav = self.inorder_tree(start.right , trav)
         return trav 
     
-    def postorder_tree(self , start , trav)  :
-        ## LEFT > RIGHT > ROOT 
+    def postorder_tree(self , start : Node , trav)  :
+
+        """ Postorder from left to right then root 
+
+        Returns:
+            postorder traversal 
+        """
+        
         if start : 
             global NodesBeenMade 
             NodesBeenMade +=1 
             trav = self.postorder_tree(start.left , trav) 
             trav = self.postorder_tree(start.right , trav)
-            trav += (str(start.data) + ",")
+            trav += (str(start.value) + ",")
         return trav 
+    
     def levelorder_tree(self , start) :
+        
+        """ Levelorder itrating over tree in the levels 
+        
+        Returns:
+            levelorder traversal 
+        """
+        
         ans = []
         if start is None : 
             return ans 
@@ -68,7 +148,7 @@ class BinaryTree :
             
             while currSize > 0 :
                 currNode = queue.popleft()
-                currList.append(currNode.data)
+                currList.append(currNode.value)
                 currSize -= 1
                 
                 if currNode.left is not None : 
@@ -80,83 +160,56 @@ class BinaryTree :
         return ans
     
     def floors_number(self) : 
-        result = tree.PrintTree("levelorder")
+        result = self.PrintTree("4")
         return len(result)
     
     def delete_tree(self) : 
-        tree.root = None 
+        
+        """ Delete the tree 
+        
+        Returns : 
+            for deleting 
+        """
+        self.root = None 
         
     def MAX_MIN(self) : 
-        result = tree.PrintTree("preorder")
+        
+        """ Max and Min in the tree : 
+        used a traversal so we can itrate 
+
+        Returns:
+            _type_: _description_
+        """
+        result = self.PrintTree("1")
         result = result.split(",")
         result.pop()
         result = [int(x) for x in result ]
+        
         return max(result),min(result)
     
-    def find(self , atribute) : 
-        result = tree.PrintTree("levelorder")
-        x = 0 
-        for i in result :
-            x +=1  
-            for j in i : 
-                if j == atribute : 
-                    return x
-        return "Not Found ! "
-    
-    def MakeList(self , type ) -> list :
-        MyList = []
-        result = tree.PrintTree(type)
-        for i in result :
-            if i != "," : 
-                MyList.append(int(i))
-        return MyList
-    
-    def compare(self , type ) : 
-        result = tree.MakeList(type)
-        print(result)
-        lst = list(map(int , input('Enter your tree with desired order : ').split()))
-        return True if result == lst else False
+    def compare(self) : 
+        pass 
+        
     
     def draw(self) :
-        result = tree.PrintTree('levelorder') 
-        result_fixed = []
-        for i in result : 
-            for j in i :
-                result_fixed.append(j)
-        drawtree(deserialize(str(result_fixed)))    
-    
-    def countLeaves(self) : 
-        result = tree.PrintTree("levelorder")
-        return len(result[2])         
-            
-        """_summary_
-       2
-      /  \
-     3    4
-    / \
-   5   6
-   [2]
-   [3.4]
-   [5,6]
+        
+        """ Draw tree 
+        
+        drawing tree using personal module 
+        first we branch our data and then we draw our tree 
+        
+        Returns : 
+            Graphical tree using python's turtle 
+
         """
-
-
-# making a test binary tree 
-tree = BinaryTree(2)   
-tree.root.left = Node(3)
-tree.root.right = Node(4)
-tree.root.left.left = Node(5)
-tree.root.left.right = Node(6)
-
-# trying out the methods 
-print(tree.PrintTree('preorder'))
-print(tree.PrintTree('inorder'))
-print(tree.PrintTree('postorder'))
-print(tree.PrintTree('levelorder'))
-print(tree.floors_number())
-print(tree.MAX_MIN())
-print(tree.find(7))
-print(tree.draw())
-print(tree.countLeaves())
-
+        Banching(self.data)
+        drawtree()
+    
+    def numberOfLeafs(self, node: Node) :        
+        if node is None:
+            return 0
+        if (node.left is None and node.right is None):
+            return 1
+        else:
+            return self.numberOfLeafs(node.left) + self.numberOfLeafs(node.right)
 

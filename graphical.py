@@ -6,20 +6,33 @@ class TreeNode:
     def __repr__(self):
         return 'TreeNode({})'.format(self.val)
     
-def deserialize(string):
-    if string == '{}':
-        return None
-    nodes = [None if val == 'null' else TreeNode(int(val))
-             for val in string.strip('[]{}').split(',')]
-    kids = nodes[::-1]
-    root = kids.pop()
-    for node in nodes:
-        if node:
-            if kids: node.left  = kids.pop()
-            if kids: node.right = kids.pop()
-    return root
+root = None
 
-def drawtree(root):
+def Banching(data):
+    for d in data:
+        insert(root, d)
+
+def insert(node, value):
+    global root
+    if root == None:
+        root = TreeNode(value)
+        return
+    
+    if node.val > value:
+        if node.left != None:
+            insert(node.left, value)
+        else:
+            node.left = TreeNode(value)
+    elif node.val < value:
+        if node.right != None:
+            insert(node.right, value)
+        else:
+            node.right = TreeNode(value)
+    else:
+        print("dublicated")
+
+def drawtree():
+    global root
     def height(root):
         return 1 + max(height(root.left), height(root.right)) if root else -1
     def jumpto(x, y):
@@ -30,7 +43,7 @@ def drawtree(root):
         if node:
             t.goto(x, y)
             jumpto(x, y-20)
-            t.write(node.val, align='center', font=('Arial', 12, 'normal'))
+            t.write(str(node.val), align='center', font=('Arial', 12, 'normal'))
             draw(node.left, x-dx, y-60, dx/2)
             jumpto(x, y-20)
             draw(node.right, x+dx, y-60, dx/2)
@@ -44,7 +57,8 @@ def drawtree(root):
     turtle.mainloop()
     
 if __name__ == '__main__':
-    drawtree(deserialize('[2,3,4,5,6]'))
+    Banching([2,3,1,4,5])
+    drawtree()
     
     
     
