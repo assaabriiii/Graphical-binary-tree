@@ -20,7 +20,7 @@ class Node :
   
 
     def __repr__(self):
-        return "value of node equals by -> " + str(self.value)
+        return "Node data : " + str(self.value)
     
     
 class BinaryTree : 
@@ -212,4 +212,23 @@ class BinaryTree :
             return 1
         else:
             return self.numberOfLeafs(node.left) + self.numberOfLeafs(node.right)
+        
+    def search(self, node: Node , Arg: int) :
+        """ Binary search 
+            implanting binary search on the tree and compare two nodes with each other 
+            search will go to right node if arg is bigger and go to left if arg is smaller 
+       
+        Returns:
+            Node 
+        """
+        if node is None or node.value == Arg:
+            return node
 
+        if node.value > Arg:
+            return self.search(node.left, Arg)
+        elif node.value < Arg:
+            return self.search(node.right, Arg)
+        
+        
+B = BinaryTree([10,1,12])
+print(B.search(B.root,15))

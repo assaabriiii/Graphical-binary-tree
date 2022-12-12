@@ -1,9 +1,7 @@
-
 import sys
 from os import system
 from Node import * 
 from time import sleep 
-
 
 def display_menu(menu):
     """
@@ -13,6 +11,11 @@ def display_menu(menu):
     """
     print(Fore.LIGHTBLUE_EX + "  -> " + Fore.WHITE + " Binary Tree Options " + Fore.LIGHTBLUE_EX + " <-\n\n")
     
+    try : 
+        print("Current tree -> " , tree.data ,"\n\n")
+    except :
+        print("Tree is not defined\n\n")
+
     for k, function in menu.items():
         print(Fore.MAGENTA ,"|",k,"| -> ", Fore.YELLOW ,function.__name__)
 
@@ -104,6 +107,17 @@ def traversal() :
         system('clear')  # clears stdout
     
 
+def Search() : 
+    system("clear")
+    print("you have selected menu option search") # Simulate function output.
+    
+    SearchCase = int(input("\n\nPlease enter your number : "))
+    print(tree.search(tree.root , SearchCase))
+    
+    input("Press Enter to Continue\n")
+    system('clear')  # clears stdout
+    
+
 def done():
     system('clear')  # clears stdout
     print("Goodbye")
@@ -116,7 +130,7 @@ def get_word():
 def main():
     # Create a menu dictionary where the key is an integer number and the
     # value is a function name.
-    functions_names = [Binarytree, Draw, MAX_and_MIN, CountLeafs , DeleteTree , numberOfFloors ,traversal, done]
+    functions_names = [Binarytree, Draw, MAX_and_MIN, CountLeafs , DeleteTree , numberOfFloors ,traversal, Search , done]
     menu_items = dict(enumerate(functions_names, start=1))
 
     while True:
@@ -128,7 +142,6 @@ def main():
 
 
 if __name__ == "__main__":
-    from colorama import Fore
-    print(Fore.RED ,"\nPlease define the tree before using other options !!!\n")
-    print(Fore.WHITE)
+    from colorama import * 
+    print("\n",Fore.WHITE , Back.RED ,"Please define the tree before using other options !!!",Back.RESET , "\n")
     main()
