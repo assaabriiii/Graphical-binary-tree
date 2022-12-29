@@ -56,9 +56,9 @@ def drawtree():
     t.hideturtle()
     turtle.mainloop()
     
-if __name__ == '__main__':
-    Banching([2,3,1,4,5])
-    drawtree()
+# if __name__ == '__main__':
+#     Banching([2,3,1,4,5])
+#     drawtree()
     
     
     

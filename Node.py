@@ -229,6 +229,21 @@ class BinaryTree :
         elif node.value < Arg:
             return self.search(node.right, Arg)
         
+    
+    def FullTree(node: Node) :
+        queue = []
+        queue.append(node)
+
+        while queue != []:
+            temp = queue.pop()
+
+            if temp.left == None and temp.right == None:
+                continue
+            elif temp.right != None and temp.left != None:
+                queue.append(temp.right)
+                queue.append(temp.left)
+            else:
+                return False
+        return True
         
-B = BinaryTree([10,1,12])
-print(B.search(B.root,15))
+        
