@@ -159,9 +159,12 @@ class BinaryTree :
             ans.append(currList) 
         return ans
     
-    def floors_number(self) : 
-        result = self.PrintTree("4")
-        return len(result)
+    def floors_number(self , node) : 
+        if node is None:
+            return 0
+        left = self.floors_number(node.left)
+        right = self.floors_number(node.right)
+        return max(left, right) + 1
     
     def delete_tree(self) : 
         
@@ -172,7 +175,7 @@ class BinaryTree :
         """
         self.root = None 
         
-    def MAX_MIN(self) : 
+    def MAX(self) : 
         
         """ Max and Min in the tree : 
         used a traversal so we can itrate 
@@ -185,12 +188,30 @@ class BinaryTree :
         result.pop()
         result = [int(x) for x in result ]
         
-        return max(result),min(result)
+        return max(result)
     
-    def compare(self) : 
-        pass 
+    def MIN(self) :
+         
+        """ Max and Min in the tree : 
+        used a traversal so we can itrate 
+
+        Returns:
+            _type_: _description_
+        """
+        
+        result = self.PrintTree("1")
+        result = result.split(",")
+        result.pop()
+        result = [int(x) for x in result ]
+        
+        return min(result)
         
     
+    def compare(self) : 
+        """ been made in the main function
+        """
+        pass 
+        
     def draw(self) :
         
         """ Draw tree 
@@ -230,8 +251,8 @@ class BinaryTree :
             return self.search(node.right, Arg)
         
     
-    def FullTree(node: Node) :
-        queue = []
+    def FullTree(self , node ) :
+        queue = list()
         queue.append(node)
 
         while queue != []:
@@ -245,5 +266,36 @@ class BinaryTree :
             else:
                 return False
         return True
+    
+
+    def isComplete(self):
+        def RisComplete(node: Node, index: int, nodeCount: int) :
+            if node == None:
+                return True
+            if index >= nodeCount:
+                return False
+            return RisComplete(node.left, 2 * index + 1, nodeCount) and RisComplete(node.right, 2 * index + 2, nodeCount)
         
-        
+    def get_count_of_children(self) :
+        def count_of_children(node: Node) : # recursive call
+            if (node == None):
+                return 0;
+            return (1 + count_of_children(node.left) + count_of_children(node.right))
+        return count_of_children(self.root) - 1 
+    
+    def number_of_nodes(self) : 
+        def count_nodes(node, counter=0) :
+            if node:
+                counter += 1
+                counter = count_nodes(node.right, counter)
+                counter = count_nodes(node.left, counter)
+            return counter
+
+        return count_nodes(self.root)
+    
+    def depth(self , node ) : 
+        if node is None:
+            return 0
+        left = self.floors_number(node.left)
+        right = self.floors_number(node.right)
+        return max(left, right) 

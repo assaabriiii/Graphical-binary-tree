@@ -13,7 +13,10 @@ def display_menu(menu):
     print(Fore.LIGHTBLUE_EX + "  -> " + Fore.WHITE + " Binary Tree Options " + Fore.LIGHTBLUE_EX + " <-\n\n")
     
     try : 
-        print("Main tree -> " , tree.data ,"\n\n")
+        if tree.root == None : 
+            print("tree is not defind\n\n")
+        else : 
+            print("Main tree -> " , tree.data , "\n\n")
     except :
         print("Tree is not defined\n\n")
     
@@ -24,6 +27,8 @@ def display_menu(menu):
         
 
     for k, function in menu.items():
+        if k < 10 : 
+            k = "0" + str(k)
         print(Fore.MAGENTA ,"|",k,"| -> ", Fore.YELLOW ,function.__name__)
 
 
@@ -33,6 +38,7 @@ def Binarytree():
     Nodes = []
     global tree
     select = input("Manually(1) or random(2) ? ")
+    
     if select == "1" :
         system("clear")
         while True : 
@@ -82,7 +88,7 @@ def Comparing() :
     print(Lary.data)
     input("Press Enter to compare\n")
     
-    if lary.PrintTree(str(1)) == tree.PrintTree(str(1)) : 
+    if lary.PrintTree(str(2)) == tree.PrintTree(str(2)) : 
         print("True")
     else : 
         print("False")
@@ -105,16 +111,25 @@ def Draw():
     system('clear')  # clears stdout
 
 
-def MAX_and_MIN():
+def max():
     system("clear")
-    print("you have selected menu option max and min") # Simulate function output.
+    print("you have selected menu option max ") # Simulate function output.
     
-    print(tree.MAX_MIN())
+    print(tree.MAX())
     
     input("Press Enter to Continue\n")
     system('clear')  # clears stdout
 
-def CountLeafs() : 
+def min() : 
+    system("clear")
+    print("you have selected menu option min") # Simulate function output.
+    
+    print(tree.MIN())
+    
+    input("Press Enter to Continue\n")
+    system('clear')  # clears stdout
+
+def count_leafs() : 
     system("clear")
     print("you have selected menu option count leafs") # Simulate function output.
     
@@ -123,7 +138,7 @@ def CountLeafs() :
     input("Press Enter to Continue\n")
     system('clear')  # clears stdout
 
-def DeleteTree() : 
+def delete_tree() : 
     system("clear")
     print("you have selected menu option delete tree") # Simulate function output.
     
@@ -132,11 +147,11 @@ def DeleteTree() :
     input("Press Enter to Continue\n")
     system('clear')  # clears stdout
     
-def numberOfFloors() : 
+def number_of_floors() : 
     system("clear")
     print("you have selected menu option number of floors") # Simulate function output.
     
-    print(tree.floors_number())
+    print(tree.floors_number(tree.root))
     
     input("Press Enter to Continue\n")
     system('clear')  # clears stdout
@@ -167,14 +182,50 @@ def Search() :
     input("Press Enter to Continue\n")
     system('clear')  # clears stdout
     
-def CheckForFullTree() : 
+def check_for_full_Tree() : 
     system("clear")
     print("you have selected menu option Checking for full tree ") # Simulate function output.
-    print(tree.FullTree())
+    print(tree.FullTree(tree.root))
+    
+    input("Press Enter to Continue\n")
+    system('clear')  # clears stdout
+
+def is_Complete() : 
+    system("clear")
+    print("you have selected menu option is complete tree ") # Simulate function output.
+    
+    print(tree.isComplete())
     
     input("Press Enter to Continue\n")
     system('clear')  # clears stdout
     
+def get_count_of_children() : 
+    system("clear")
+    print("you have selected menu option is count of children ") # Simulate function output.
+    
+    print(tree.get_count_of_children())
+    
+    input("Press Enter to Continue\n")
+    system('clear')  # clears stdout
+    
+def number_of_nodes() : 
+    system("clear")
+    print("you have selected menu option is count of children ") # Simulate function output.
+    
+    print(tree.number_of_nodes())
+    
+    input("Press Enter to Continue\n")
+    system('clear')  # clears stdout
+
+def Depth() : 
+    system("clear")
+    print("you have selected menu option depth ") # Simulate function output.
+    
+    print(tree.depth(tree.root))
+    
+    input("Press Enter to Continue\n")
+    system('clear')  # clears stdout
+
 def Contributors() : 
     system("clear")
     print(Fore.RESET,"\nAmirhossein Sabry 40011573\nKimia Keivanloo 40015753\n\nWWW.GEEKFORGEEKS.COM \u2764\uFE0F")
@@ -194,7 +245,7 @@ def get_word():
 def main():
     # Create a menu dictionary where the key is an integer number and the
     # value is a function name.
-    functions_names = [Binarytree,Comparing, Draw, MAX_and_MIN, CountLeafs , DeleteTree , numberOfFloors ,traversal, Search ,CheckForFullTree, Contributors ,done]
+    functions_names = [Binarytree , Comparing , Draw, max , min , count_leafs , delete_tree , number_of_floors , Depth  , traversal , Search , check_for_full_Tree , is_Complete , get_count_of_children , number_of_nodes , Contributors , done]
     menu_items = dict(enumerate(functions_names, start=1))
 
     while True:
