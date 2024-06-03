@@ -7,3 +7,8 @@
 #### Graphic : 
 
 ![alt text](images/draw.png)
+
+## Authors
+
+- Amir Sabri: [@assaabriiii](https://github.com/assaabriiii) 
+- Kimia Keivanloo: [@kimiakeivan](https://github.com/kimiakeivan) 
