@@ -1,6 +1,6 @@
 import sys
 from os import system
-from Node import * 
+from BinaryTrees.Node import * 
 from time import sleep 
 import random 
 
@@ -97,15 +97,19 @@ def Comparing() :
     system('clear')  # clears stdout
 
         
-def Draw():
+def Draw(nodes=[]):
     system("clear")
     print("you have selected menu option drawing") # Simulate function output.
-    
-    try : 
-        tree.draw()
-    except : 
-        print("There is no tree or it's been deleted")
-        
+    if len(nodes) != 0: 
+        s_tree = BinaryTree(nodes)
+        s_tree.draw()
+    else:
+        try : 
+            tree.draw()
+        except Exception as e: 
+            print("There is no tree or it's been deleted")
+            print(e)
+            
     input("Press Enter to Continue\n")
     
     system('clear')  # clears stdout
