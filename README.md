@@ -19,7 +19,7 @@ from BinaryTrees.Node import BinaryTree
 tree = [12,2,123,2,12]
 tree = BinaryTree(tree)
 tree.draw() # also checkout other methods 
-```
+```python
 
 ## Authors
 
