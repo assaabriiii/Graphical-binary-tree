@@ -8,6 +8,10 @@
 
 ![alt text](images/draw.png)
 
+
+##### You can intall this as a python package: 
+`pip install BinaryTreess`
+
 ## Authors
 
 - Amir Sabri: [@assaabriiii](https://github.com/assaabriiii) 
