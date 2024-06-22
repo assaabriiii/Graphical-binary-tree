@@ -10,7 +10,9 @@
 
 
 ##### You can intall this as a python package: 
-`pip install BinaryTreess`
+```bash
+pip install BinaryTreat
+```
 
 ##### Usage: 
 ```python
